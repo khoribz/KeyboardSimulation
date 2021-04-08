@@ -1,4 +1,4 @@
 speed:
-3.28
+0
 mistakes:
-7
+0
