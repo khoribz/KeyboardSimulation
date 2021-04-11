@@ -1,3 +1,3 @@
-import GAME
+import game
 
-GAME.run_keyboard()
+game.run_keyboard()
