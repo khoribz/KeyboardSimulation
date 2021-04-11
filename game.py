@@ -111,7 +111,7 @@ def end_of_game(general_time, mistakes, text, heatmap):
         # обработка окна ввода текста после завершения сеанса
         text_for_input_box = "You typed all the text"
         input_text = global_file.font.render(text_for_input_box, True, color.BLACK)
-        input_box_indent_x = global_file.input_box.w * 0.3
+        input_box_indent_x = global_file.input_box.w * 0.4
         place_for_input_box_x = global_file.input_box.x + input_box_indent_x
         input_box_indent_y = 5
         place_for_input_box_y = global_file.input_box.y + input_box_indent_y
@@ -119,7 +119,7 @@ def end_of_game(general_time, mistakes, text, heatmap):
 
         global_file.display.blit(try_again_button, try_again_button_coord)
 
-        rect_line_width = 3
+        rect_line_width = 3  # ширина линии прямоугольников
         pg.draw.rect(global_file.display, color.GRAY, global_file.input_box, rect_line_width)
         pg.draw.rect(global_file.display, color.BLACK, global_file.text_box, rect_line_width)
         pg.display.update()

@@ -149,9 +149,9 @@ def draw_input_text(keyboard_is_active, text_of_input):
     """
     input_text_image = global_file.font.render(text_of_input, True, color.BLACK)
     top_indent = 5
-    input_box_on_indent = global_file.input_box.w * 0.4
+    input_box_on_indent = global_file.input_box.w * 0.5  # какой отступ вводимого текста от края окна вывода во время включенной клавиатуры
     location_for_input_box_on = global_file.input_box.x + input_box_on_indent
-    location_for_input_box_off = global_file.display_width / 3
+    location_for_input_box_off = global_file.display_width / 3  # какой отступ текста от края окна вывода, если клавиатура неактивна
     if keyboard_is_active:
         global_file.display.blit(input_text_image, (location_for_input_box_on, global_file.input_box.y + top_indent))
     else:
