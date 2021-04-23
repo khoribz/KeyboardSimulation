@@ -15,13 +15,17 @@ def draw_text(screen, text, color_of_text, rect):
     :param color_of_text: цвет текста, который нужно написать
     :param rect: прямоугольник,в котором нужно написать текст
     """
+    rect_x = rect[0]  # координата X нашего окна
+    rect_y = rect[1]  # координата У нашего окна
+    rect_w = rect[2]  # ширина нашего окна
+    rect_h = rect[3]  # высота нашего окна
     line_space = 20  # расстояние между строками
-    space_width = 10   # расстояние между словами
+    space_width = 10  # расстояние между словами
     list_of_words = text.split(" ")  # разделяем текст на слова и кладем в лист
     # image_list - получаем лист из картинок слов
     image_list = [global_file.font.render(word, True, color_of_text) for word in list_of_words]
     right_indent = 15  # отступ справа 15
-    max_len = rect[2] - right_indent  # устанавливаем максимальную длину строки с определенным отступом справа
+    max_len = rect_w - right_indent  # устанавливаем максимальную длину строки с определенным отступом справа
     line_len_list = [0]  # лист из длин полученных строк
     line_list = [[]]  # лист из полученных строк
     for image in image_list:
@@ -35,20 +39,23 @@ def draw_text(screen, text, color_of_text, rect):
         else:  # если строка не помещается в нашу область
             line_len_list.append(width)  # добавляем в лист размера строк размер нового слова на следующей строке
             line_list.append([image])  # добавляем в лист следующую строку
-    line_bottom = rect[1]  # нижняя граница нашего текста в текущий момент времени
+    line_bottom = rect_y  # координата У нашего текста в текущий момент времени
     lines = 0  # количество строк
+    height_of_rect = rect_y + rect_h
     for lineImages in line_list:  # пробегаемся по всем строкам
-        if line_bottom + line_space > rect[1] + rect[3]:
+        if line_bottom + line_space > height_of_rect:  # если при переносе очередной строки выходим
+            # вниз за границы окна, останавливаем вывод текста
             break
         left_indent = 10  # отступ слева 10
         # line_left - левая граница нашего текста в текущий момент времени с определенным отступом слева 10
-        line_left = rect[0] + left_indent
-        for i, image in enumerate(lineImages):   # пробегаемся по всем словам и печатаем их
+        line_left = rect_x + left_indent
+        for i, image in enumerate(lineImages):  # пробегаемся по всем словам в строке и печатаем их
             x, y = line_left + i * space_width, line_bottom
+            # координата x задается левым отступом и количеством пробелов
             screen.blit(image, (x, y))
-            line_left += image.get_width()
-        lines += 1
-        line_bottom += line_space
+            line_left += image.get_width()  # левый отступ увеличивается на ширину добавленного слова
+        lines += 1  # переходим на следующую строку
+        line_bottom += line_space  # увеличиваем координату У нашего текста на расстояние между строками
 
 
 def print_text(message, font_color, place, font_size):
@@ -98,37 +105,37 @@ def print_for_end(text, symbols_per_second, mistakes, accuracy, heatmap):
     first_line = "Total number of typed symbols"
     print_text(first_line, color.BLACK, (global_file.text_box.x +
                                          left_indent_for_words, global_file.text_box.y + changing_indent_y), font_size)
-    print_text("---  " + str(len(text)), color.BLACK, (global_file.text_box.x + left_indent_for_data,
-                                                       global_file.text_box.y + changing_indent_y), font_size)
+    print_text(f"---  {len(text)}", color.BLACK, (global_file.text_box.x + left_indent_for_data,
+                                                  global_file.text_box.y + changing_indent_y), font_size)
 
     changing_indent_y += font_size
     second_line = "Total number of mistakes"
     print_text(second_line, color.BLACK, (global_file.text_box.x +
                                           left_indent_for_words, global_file.text_box.y + changing_indent_y), font_size)
-    print_text("---  " + str(mistakes), color.BLACK, (global_file.text_box.x + left_indent_for_data,
-                                                      global_file.text_box.y + changing_indent_y), font_size)
+    print_text(f"---  {mistakes}", color.BLACK, (global_file.text_box.x + left_indent_for_data,
+                                                 global_file.text_box.y + changing_indent_y), font_size)
 
     changing_indent_y += font_size
     third_line = "Accuracy"
     print_text(third_line, color.BLACK, (global_file.text_box.x + left_indent_for_words,
                                          global_file.text_box.y + changing_indent_y), font_size)
-    print_text("---  " + str(accuracy) + "%", color.BLACK, (global_file.text_box.x + left_indent_for_data,
-                                                            global_file.text_box.y + changing_indent_y), font_size)
+    print_text(f"---  {accuracy}%", color.BLACK, (global_file.text_box.x + left_indent_for_data,
+                                                  global_file.text_box.y + changing_indent_y), font_size)
 
     changing_indent_y += font_size
     fourth_line = "Symbols per second"
     print_text(fourth_line, color.BLACK, (global_file.text_box.x +
                                           left_indent_for_words, global_file.text_box.y + changing_indent_y), font_size)
-    print_text("---  " + str(symbols_per_second), color.BLACK, (global_file.text_box.x + left_indent_for_data,
-                                                                global_file.text_box.y + changing_indent_y), font_size)
+    print_text(f"---  {symbols_per_second}", color.BLACK, (global_file.text_box.x + left_indent_for_data,
+                                                           global_file.text_box.y + changing_indent_y), font_size)
 
     changing_indent_y += font_size
     input_heatmap = functions.heatmap_sort(heatmap)
     fifth_line = "The most erroneous symbols"
     print_text(fifth_line, color.BLACK, (global_file.text_box.x +
                                          left_indent_for_words, global_file.text_box.y + changing_indent_y), font_size)
-    print_text("---  " + str(input_heatmap), color.BLACK, (global_file.text_box.x + left_indent_for_data,
-                                                           global_file.text_box.y + changing_indent_y), font_size)
+    print_text(f"---  {input_heatmap}", color.BLACK, (global_file.text_box.x + left_indent_for_data,
+                                                      global_file.text_box.y + changing_indent_y), font_size)
 
 
 def print_word_mistake(timer_for_mistakes):
