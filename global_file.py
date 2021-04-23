@@ -1,5 +1,6 @@
 import pygame as pg
 
+import color
 
 FPS = 30
 display_width = 800
@@ -40,3 +41,13 @@ test_box_w = 700
 test_box_h = 150
 text_box = pg.Rect(test_box_x, test_box_y, test_box_w, test_box_h)  # задаем размеры окна, в котором отображается текст
 font_type = 'fonts/font.ttf'  # устанавливаем шрифт
+
+keyboard_is_active = False  # нажималось ли на окно ввода
+text_of_input = 'Нажмите, чтобы ввести текст'  # текст в окне ввода
+color_of_input = color.GRAY  # цвет окна ввода
+timer_for_mistakes = 0  # таймер нужный для вывода надписи MISTAKE на определенное время
+timer_of_game = 0  # таймер для подсчета времени сеанса
+last_data = ''  # строка со статистикой прошлого запуска
+cnt_in_text = 0  # какой сейчас символ проверяется
+import_text_str = ''  # строка, в которую импортируется текст из файла
+mistakes = 0  # количество совершенных ошибок

@@ -17,10 +17,7 @@ def check_letter(event, cnt, text):
     if cnt >= len(text):
         return return_for_end
     else:
-        if event == text[cnt]:
-            return True
-        else:
-            return False
+        return event == text[cnt]
 
 
 def keyboard_creation():
@@ -42,8 +39,9 @@ def heatmap_sort(heatmap):
     sorted_keys = sorted(heatmap.items(), key=operator.itemgetter(1))
     sorted_keys.reverse()
     input_heatmap = []
-    if len(sorted_keys) > 3:
-        for i in range(3):
+    size_of_output_map = 3
+    if len(sorted_keys) > size_of_output_map:
+        for i in range(size_of_output_map):
             input_heatmap.append(sorted_keys[i])
     else:
         input_heatmap = list(sorted_keys)

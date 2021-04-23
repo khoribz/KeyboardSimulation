@@ -1,3 +1,4 @@
+import os
 import random
 
 
@@ -8,8 +9,8 @@ def export_of_data(speed, mistakes):
     :param mistakes: количество ошибок игрока в последнем сеансе
     """
     with open('data.txt', 'w') as data_file:
-        data_file.write("speed:\n" + str(speed) + '\n')
-        data_file.write("mistakes:\n" + str(mistakes))
+        data_file.write('speed:\n' + str(speed) + '\n')
+        data_file.write('mistakes:\n' + str(mistakes))
 
 
 def import_of_speed():
@@ -37,9 +38,10 @@ def import_text():
     Импорт текста путем рандома из файлов, которые есть в папке
     :return: строка с текстом из файла
     """
-    arr_texts = ['texts/1.txt', 'texts/2.txt', 'texts/3.txt', 'texts/4.txt', 'texts/5.txt',
-                 'texts/6.txt', 'texts/7.txt', 'texts/8.txt', 'texts/9.txt', 'texts/10.txt']
+    list_of_files = os.listdir('texts')  # лист из текстов
+    number_files = len(list_of_files)  # число текстов
+    num_of_first_file = 1  # номер первого файла
+    arr_texts = ['texts/' + str(i) + '.txt' for i in range(num_of_first_file, number_files)]
     with open(arr_texts[random.randint(0, len(arr_texts) - 1)]) as data_file:
         words = data_file.read()
-        words = words[:-1]
     return words

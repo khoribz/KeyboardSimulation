@@ -15,10 +15,11 @@ def draw_text(screen, text, color_of_text, rect):
     :param color_of_text: цвет текста, который нужно написать
     :param rect: прямоугольник,в котором нужно написать текст
     """
-    line_space = 20  # растояние между строками
-    space_width = 10   # растояние между словами
+    line_space = 20  # расстояние между строками
+    space_width = 10   # расстояние между словами
     list_of_words = text.split(" ")  # разделяем текст на слова и кладем в лист
-    image_list = [global_file.font.render(word, True, color_of_text) for word in list_of_words]   # получаем лист из картинок слов
+    # image_list - получаем лист из картинок слов
+    image_list = [global_file.font.render(word, True, color_of_text) for word in list_of_words]
     right_indent = 15  # отступ справа 15
     max_len = rect[2] - right_indent  # устанавливаем максимальную длину строки с определенным отступом справа
     line_len_list = [0]  # лист из длин полученных строк
@@ -40,7 +41,8 @@ def draw_text(screen, text, color_of_text, rect):
         if line_bottom + line_space > rect[1] + rect[3]:
             break
         left_indent = 10  # отступ слева 10
-        line_left = rect[0] + left_indent  # левая граница нашего текста в текущий момент времени с определенным отступом слева 10
+        # line_left - левая граница нашего текста в текущий момент времени с определенным отступом слева 10
+        line_left = rect[0] + left_indent
         for i, image in enumerate(lineImages):   # пробегаемся по всем словам и печатаем их
             x, y = line_left + i * space_width, line_bottom
             screen.blit(image, (x, y))
@@ -124,9 +126,9 @@ def print_for_end(text, symbols_per_second, mistakes, accuracy, heatmap):
     input_heatmap = functions.heatmap_sort(heatmap)
     fifth_line = "The most erroneous symbols"
     print_text(fifth_line, color.BLACK, (global_file.text_box.x +
-                                          left_indent_for_words, global_file.text_box.y + changing_indent_y), font_size)
+                                         left_indent_for_words, global_file.text_box.y + changing_indent_y), font_size)
     print_text("---  " + str(input_heatmap), color.BLACK, (global_file.text_box.x + left_indent_for_data,
-                                                                global_file.text_box.y + changing_indent_y), font_size)
+                                                           global_file.text_box.y + changing_indent_y), font_size)
 
 
 def print_word_mistake(timer_for_mistakes):
@@ -149,10 +151,14 @@ def draw_input_text(keyboard_is_active, text_of_input):
     """
     input_text_image = global_file.font.render(text_of_input, True, color.BLACK)
     top_indent = 5
-    input_box_on_indent = global_file.input_box.w * 0.5  # какой отступ вводимого текста от края окна вывода во время включенной клавиатуры
+    coefficient_for_input_box_on = 0.4
+    # input_box_on_indent - отступ вводимого текста от края окна вывода во время включенной клавиатуры
+    input_box_on_indent = global_file.input_box.w * coefficient_for_input_box_on
     location_for_input_box_on = global_file.input_box.x + input_box_on_indent
-    location_for_input_box_off = global_file.display_width / 3  # какой отступ текста от края окна вывода, если клавиатура неактивна
-    if keyboard_is_active:
-        global_file.display.blit(input_text_image, (location_for_input_box_on, global_file.input_box.y + top_indent))
-    else:
-        global_file.display.blit(input_text_image, (location_for_input_box_off, global_file.input_box.y + top_indent))
+    # location_for_input_box_off - отступ текста от края окна вывода, если клавиатура неактивна
+    coefficient_for_input_box_off = 0.3
+    location_for_input_box_off = global_file.display_width * coefficient_for_input_box_off
+    box_on = (location_for_input_box_on, global_file.input_box.y + top_indent)
+    box_off = (location_for_input_box_off, global_file.input_box.y + top_indent)
+    box = box_on if keyboard_is_active else box_off
+    global_file.display.blit(input_text_image, box)
