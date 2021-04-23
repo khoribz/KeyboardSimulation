@@ -56,14 +56,16 @@ def processing_keydown(event, heatmap):
                     global_file.text_of_input = ''
             elif functions.check_letter(event.unicode, global_file.cnt_in_text, global_file.import_text_str) == "end_of_file":
                 # если файл закончился переходим в функцию end_of_game
-                end_of_game(time.time() - global_file.timer_of_game, global_file.mistakes, global_file.import_text_str, heatmap)
+                end_of_game(time.time() - global_file.timer_of_game,
+                            global_file.mistakes, global_file.import_text_str, heatmap)
             else:
                 if event.key != K_LSHIFT:  # чтобы дать пользователю время при печатании
                     # заглавных букв дотянуться от SHIFT до клавиши, и это не было ошибкой
                     global_file.mistakes += 1
                     heatmap[chr(event.key)] = heatmap.get(chr(event.key), 0) + 1
                     seconds_for_mistake = 0.5  # задержка MISTAKE в секундах
-                    global_file.timer_for_mistakes = time.time() + seconds_for_mistake  # задержка MISTAKE на определенное время
+                    # задержка MISTAKE на определенное время
+                    global_file.timer_for_mistakes = time.time() + seconds_for_mistake
 
 
 def run_keyboard():
@@ -99,7 +101,8 @@ def run_keyboard():
         print_file.draw_input_text(global_file.keyboard_is_active, global_file.text_of_input)  # отрисовка вводимого слова
 
         rect_line_width = 3
-        pg.draw.rect(global_file.display, global_file.color_of_input, global_file.input_box, rect_line_width)  # отрисовка окна ввода
+        # отрисовка окна ввода
+        pg.draw.rect(global_file.display, global_file.color_of_input, global_file.input_box, rect_line_width)
         pg.draw.rect(global_file.display, color.BLACK, global_file.text_box, rect_line_width)  # отрисовка окна с текстом
         pg.display.update()
 
