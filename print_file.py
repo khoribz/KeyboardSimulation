@@ -2,8 +2,8 @@ import time
 
 import pygame as pg
 
-import functions
 import color
+import functions
 import global_file
 
 
