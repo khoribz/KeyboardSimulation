@@ -7,8 +7,8 @@ from pygame.locals import K_SPACE
 
 import color
 import data
-import global_file
 import functions
+import global_file
 import print_file
 
 
