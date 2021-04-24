@@ -21,7 +21,7 @@ def draw_text(screen, text, color_of_text, rect):
     rect_h = rect[3]  # высота нашего окна
     line_space = 20  # расстояние между строками
     space_width = 10  # расстояние между словами
-    list_of_words = text.split(" ")  # разделяем текст на слова и кладем в лист
+    list_of_words = text.split()  # разделяем текст на слова и кладем в лист
     # image_list - получаем лист из картинок слов
     image_list = [global_file.font.render(word, True, color_of_text) for word in list_of_words]
     right_indent = 15  # отступ справа 15
