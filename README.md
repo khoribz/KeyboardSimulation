@@ -1,35 +1,35 @@
-## Запуск клавиатурного тренажера  
-**Чтобы запустить клавиатурный тренажер, необходимо иметь установленный pygame прописать в терминале следующие команды:**
+## Launching the keyboard simulator 
+To start the keyboard simulator, you should have PyGame installed and register the following commands in the terminal:
 ```bash
 git clone https://github.com/khoribz/review1.git -b dev
 cd review1
 python3 main.py
-```  
-**После написания команды ***python3 main.py*** следует установить русскую раскладку клавиатуры для настройки UNICODE с русским языком и только потом нажимать ENTER.**
+```
+## Keyboard Simulator interface  
+- At the top there is an inscription that informs about the results of the last launch.  
+- The text to be printed is shown in the window just below. At the end of the input, data about the completed attempt is written in this window,
+and the **"TRY AGAIN"** button appears for a new typing attempt. 
+- Just below is a picture of the keyboard. 
+- There are two entries under the keyboard image on the sides: on the left - the typing speed at the moment, on the right - the number of errors at the moment.  
+- At the very bottom there is an input field. It is available by clicking the left mouse button on the area.
 
-## Интерфейс клавиатурного тренажера  
-**- Наверху находится надпись, которая сообщает о результатах прошлого запуска.**  
-**- Чуть ниже в окне показывается текст, который нужно напечатать. При окончании ввода, в этом окне пишутся данные о совершенной попытке, 
-и появляется кнопка ***"TRY AGAIN"*** для новой попытки набора текста.**  
-**- Чуть ниже располагается картинка клавиатуры.**  
-**- Под изображением клавиатуры по бокам находятся две записи: слева - скорость печатания в данный момент, справа - количество ошибок в данный момент.**  
-**- В самом низу находится поле ввода. Оно доступно при нажатии левой кнопки мыши на область.**
+## What does a keyboard simulator look like? 
+Before entering the text 
+![before](screenshots/before_input.jpg) 
 
-## Как выглядит клавиатурный тренажер?  
-**До ввода текста**
-![before](screenshots/before_input.jpg)
-**Во время ввода текста**  
-![during](screenshots/during_input.jpg)
-**После ввода текста**  
-![after](screenshots/after_input.jpg)
+While entering text 
+![during](screenshots/during_input.jpg) 
 
-## Структура программы  
-**При запуске программы в окне появляется текст(выбирается рандомом из всех текстов в папке ***texts***), который нужно напечатать, а чуть выше в надпись импортируется статистика набора прошлого текста.
-Для старта нужно нажать на окошко "Нажмите, чтобы ввести текст".
-После этого с вводом первого символа начнется отсчет времени, и на экран будет выводиться скорость печатания и количество ошибок в реальном времени.
-Ошибкой считается неправильный ввод символа (пользователь, узнает об этом, так как появляется надпись ***"MISTAKE"*** в верхней части окна).
-При этом не напечатав, какой-либо символ правильно, доступ к печатанию последующих символов будет закрытым.
-При верном вводе слова и нажатии на пробел, слово исчезает из панели ввода.
-При окончании набора текста, в верхнем окне показывается статистика набора данного текста. Она экспортируется в файл ***data.txt*** .
-При нажатии кнопки ***"TRY AGAIN"*** все начинается сначала.
-При нажатии на крестик тренажер закрывается.**
+After entering the text 
+![after](screenshots/after_input.jpg) 
+
+## Program structure 
+When the program starts, the text appears in the window (selected randomly from all the texts in the **texts** folder) to be printed, and the statistics of typing the previous text are imported into the inscription just above.
+To start, you need to click on the "Click to enter text" window.
+After that, with the input of the first character, the countdown will begin, and the screen will display the printing speed and the number of errors in real time.
+Incorrect character input is considered an error (the user will find out about it, as the inscription **"MISTAKE"** appears at the top of the window).
+At the same time, without printing any character correctly, access to printing subsequent characters will be closed.
+If you enter a word correctly and press the space bar, the word disappears from the input panel.
+At the end of typing, the statistics of typing this text is displayed in the upper window. It is exported to a file **data.txt** .
+When you press the **"TRY AGAIN"** button, everything starts over.
+When you click on the cross, the simulator closes.
