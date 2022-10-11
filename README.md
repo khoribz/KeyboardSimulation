@@ -17,9 +17,6 @@ and the **"TRY AGAIN"** button appears for a new typing attempt.
 Before entering the text 
 ![before](screenshots/before_input.jpg) 
 
-While entering text 
-![during](screenshots/during_input.jpg) 
-
 After entering the text 
 ![after](screenshots/after_input.jpg) 
 
