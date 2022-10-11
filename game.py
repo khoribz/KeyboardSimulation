@@ -35,7 +35,7 @@ def processing_mouse(event):
             global_file.keyboard_is_active = True
             global_file.color_of_input = color.BLACK
             global_file.last_data = ''  # исчезает статистика прошлого запуска
-            if global_file.text_of_input == "Нажмите, чтобы ввести текст":
+            if global_file.text_of_input == "     Сlick to start typing":
                 global_file.text_of_input = ''  # окно ввода становится пустым
                 global_file.timer_of_game = time.time()  # запускается таймер сеанса
 
@@ -73,7 +73,7 @@ def run_keyboard():
     Основная функция, обрабатывающая нажатия
     """
     global_file.keyboard_is_active = False  # нажималось ли на окно ввода
-    global_file.text_of_input = 'Нажмите, чтобы ввести текст'  # текст в окне ввода
+    global_file.text_of_input = '     Сlick to start typing'  # текст в окне ввода
     global_file.cnt_in_text = 0  # какой сейчас символ проверяется
     global_file.mistakes = 0  # количество совершенных ошибок
     global_file.color_of_input = color.GRAY  # цвет окна ввода
